@@ -1,4 +1,9 @@
-const io=require('socket.io')(5000)
+const express=require('express')
+const app=(express)
+const server=require('http').Server(app)
+const io=require('socket.io')(server)
+
+app.use(express.static(__dirname+'./client/build'))
 io.on('connection',socket=>{
     const id=socket.handshake.query.id
     socket.join(id)
